@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ClubSMS App - Color Resources
+    
+    Defines the color palette for the Club SMS Broadcasting app.
+    Uses Material Design color principles with:
+    - Primary colors for main UI elements
+    - Secondary colors for supporting elements
+    - Semantic colors for status and feedback
+    - Accessibility-compliant contrast ratios
+    
+    Color scheme supports both light theme operation.
+    All colors follow WCAG 2.1 accessibility guidelines.
+    
+    @author John (Electrical Engineer)
+    @version 1.0
+    @since 2024-12-24
+-->
+<resources>
+    
+    <!-- Primary Brand Colors -->
+    <color name="primary_color">#2196F3</color>           <!-- Material Blue -->
+    <color name="primary_dark">#1976D2</color>            <!-- Darker blue for status bar -->
+    <color name="primary_light">#BBDEFB</color>           <!-- Light blue for accents -->
+    <color name="accent_color">#FF5722</color>            <!-- Orange accent for highlights -->
+    
+    <!-- Background Colors -->
+    <color name="background_light">#FAFAFA</color>        <!-- Main app background -->
+    <color name="background_white">#FFFFFF</color>        <!-- Pure white for cards -->
+    <color name="card_background">#FFFFFF</color>         <!-- Card background -->
+    <color name="item_background">#FFFFFF</color>         <!-- List item background -->
+    <color name="header_background">#F5F5F5</color>       <!-- Header section background -->
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#212121</color>            <!-- Primary text (87% opacity) -->
+    <color name="text_secondary">#757575</color>          <!-- Secondary text (54% opacity) -->
+    <color name="text_hint">#BDBDBD</color>               <!-- Hint text (38% opacity) -->
+    <color name="text_disabled">#E0E0E0</color>           <!-- Disabled text -->
+    <color name="text_white">#FFFFFF</color>              <!-- White text for dark backgrounds -->
+    
+    <!-- Button Colors -->
+    <color name="button_primary">#2196F3</color>          <!-- Primary button background -->
+    <color name="button_primary_pressed">#1976D2</color>  <!-- Primary button pressed state -->
+    <color name="button_primary_disabled">#BBDEFB</color> <!-- Primary button disabled -->
+    <color name="button_secondary">#EEEEEE</color>        <!-- Secondary button background -->
+    <color name="button_secondary_pressed">#E0E0E0</color><!-- Secondary button pressed -->
+    
+    <!-- Button Text Colors -->
+    <color name="button_text">#FFFFFF</color>             <!-- Text on primary buttons -->
+    <color name="button_text_secondary">#424242</color>   <!-- Text on secondary buttons -->
+    <color name="button_text_disabled">#9E9E9E</color>    <!-- Text on disabled buttons -->
+    
+    <!-- Status and Feedback Colors -->
+    <color name="success_color">#4CAF50</color>           <!-- Green for success states -->
+    <color name="success_light">#C8E6C9</color>           <!-- Light green for backgrounds -->
+    <color name="warning_color">#FF9800</color>           <!-- Orange for warnings -->
+    <color name="warning_light">#FFE0B2</color>           <!-- Light orange for backgrounds -->
+    <color name="error_color">#F44336</color>             <!-- Red for errors -->
+    <color name="error_light">#FFCDD2</color>             <!-- Light red for backgrounds -->
+    <color name="info_color">#2196F3</color>              <!-- Blue for information -->
+    <color name="info_light">#BBDEFB</color>              <!-- Light blue for backgrounds -->
+    
+    <!-- Message Status Badge Colors -->
+    <color name="status_excellent">#4CAF50</color>        <!-- 95%+ success rate -->
+    <color name="status_good">#8BC34A</color>             <!-- 80-94% success rate -->
+    <color name="status_poor">#FF9800</color>             <!-- 50-79% success rate -->
+    <color name="status_failed">#F44336</color>           <!-- <50% success rate -->
+    <color name="status_no_recipients">#9E9E9E</color>    <!-- No recipients -->
+    
+    <!-- Badge Text Colors -->
+    <color name="badge_text">#FFFFFF</color>              <!-- Text on status badges -->
+    <color name="badge_text_dark">#424242</color>         <!-- Dark text for light badges -->
+    
+    <!-- Statistics Display Colors -->
+    <color name="stat_number">#2196F3</color>             <!-- Number display in stats -->
+    <color name="stat_positive">#4CAF50</color>           <!-- Positive trend indicators -->
+    <color name="stat_negative">#F44336</color>           <!-- Negative trend indicators -->
+    <color name="stat_neutral">#9E9E9E</color>            <!-- Neutral trend indicators -->
+    
+    <!-- Border and Divider Colors -->
+    <color name="divider_color">#E0E0E0</color>           <!-- Standard divider lines -->
+    <color name="border_light">#EEEEEE</color>            <!-- Light borders for cards -->
+    <color name="border_dark">#BDBDBD</color>             <!-- Darker borders for emphasis -->
+    
+    <!-- Icon Tint Colors -->
+    <color name="icon_tint">#757575</color>               <!-- Standard icon tint -->
+    <color name="icon_tint_light">#BDBDBD</color>         <!-- Light icon tint -->
+    <color name="icon_tint_dark">#424242</color>          <!-- Dark icon tint -->
+    <color name="icon_accent">#FF5722</color>             <!-- Accent colored icons -->
+    
+    <!-- Input Field Colors -->
+    <color name="input_background">#FAFAFA</color>        <!-- Input field background -->
+    <color name="input_border">#E0E0E0</color>            <!-- Input field border -->
+    <color name="input_border_focused">#2196F3</color>    <!-- Focused input border -->
+    <color name="input_text">#212121</color>              <!-- Input field text -->
+    <color name="input_hint">#9E9E9E</color>              <!-- Input field hint text -->
+    
+    <!-- Progress and Loading Colors -->
+    <color name="progress_primary">#2196F3</color>        <!-- Primary progress color -->
+    <color name="progress_background">#E3F2FD</color>     <!-- Progress background -->
+    <color name="loading_overlay">#80000000</color>       <!-- Semi-transparent loading overlay -->
+    
+    <!-- Contact Status Colors -->
+    <color name="contact_active">#4CAF50</color>          <!-- Active club member -->
+    <color name="contact_inactive">#9E9E9E</color>        <!-- Inactive member -->
+    <color name="contact_opted_out">#FF9800</color>       <!-- Opted out member -->
+    <color name="contact_new">#2196F3</color>             <!-- Newly added member -->
+    
+    <!-- Special UI Element Colors -->
+    <color name="floating_action_button">#FF5722</color>  <!-- FAB background -->
+    <color name="floating_action_button_pressed">#E64A19</color> <!-- FAB pressed -->
+    <color name="selection_highlight">#E3F2FD</color>     <!-- Selected item highlight -->
+    <color name="ripple_effect">#40000000</color>         <!-- Touch ripple effect -->
+    
+    <!-- Notification Colors -->
+    <color name="notification_icon">#2196F3</color>       <!-- Notification icon color -->
+    <color name="notification_accent">#FF5722</color>     <!-- Notification accent color -->
+    
+    <!-- Dark Theme Support (for future implementation) -->
+    <color name="dark_background">#121212</color>         <!-- Dark theme background -->
+    <color name="dark_surface">#1E1E1E</color>           <!-- Dark theme surface -->
+    <color name="dark_text_primary">#FFFFFF</color>       <!-- Dark theme primary text -->
+    <color name="dark_text_secondary">#AAAAAA</color>     <!-- Dark theme secondary text -->
+    
+    <!-- Transparency Levels -->
+    <color name="transparent">#00000000</color>           <!-- Fully transparent -->
+    <color name="semi_transparent_light">#80FFFFFF</color><!-- 50% transparent white -->
+    <color name="semi_transparent_dark">#80000000</color> <!-- 50% transparent black -->
+    <color name="overlay_light">#40FFFFFF</color>         <!-- 25% transparent white -->
+    <color name="overlay_dark">#40000000</color>          <!-- 25% transparent black -->
+    
+</resources>

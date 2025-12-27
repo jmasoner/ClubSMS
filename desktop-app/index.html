@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    <title>ClubSMS Desktop</title>
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a25;
+            --bg-input: #0d0d12;
+            --accent: #00d4ff;
+            --accent-glow: rgba(0, 212, 255, 0.3);
+            --success: #00ff88;
+            --warning: #ffaa00;
+            --error: #ff4466;
+            --text-primary: #ffffff;
+            --text-secondary: #8888aa;
+            --text-muted: #555566;
+            --border: #2a2a3a;
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .app {
+            display: grid;
+            grid-template-columns: 280px 1fr 300px;
+            grid-template-rows: auto 1fr;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            -webkit-app-region: drag;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .connection-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            -webkit-app-region: no-drag;
+        }
+
+        .connection-badge.disconnected {
+            background: rgba(255, 68, 102, 0.15);
+            color: var(--error);
+        }
+
+        .connection-badge.connected {
+            background: rgba(0, 255, 136, 0.15);
+            color: var(--success);
+        }
+
+        .connection-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .header-stats {
+            margin-left: auto;
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            -webkit-app-region: no-drag;
+        }
+
+        .header-stat {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: var(--bg-card);
+            border-radius: 12px;
+        }
+
+        .header-stat.warning { color: var(--warning); }
+        .header-stat.error { color: var(--error); }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .section-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .input-group { margin-bottom: 12px; }
+
+        .input-label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: 'Consolas', monospace;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #0099cc);
+            color: #000;
+        }
+
+        .btn-primary:hover { transform: translateY(-1px); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .btn-danger {
+            background: rgba(255, 68, 102, 0.2);
+            color: var(--error);
+            border: 1px solid var(--error);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #00aa55);
+            color: #000;
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-warning {
+            background: rgba(255, 170, 0, 0.2);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
+        /* Phone Info */
+        .phone-info {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 12px;
+            margin-top: 16px;
+        }
+
+        .phone-info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+        }
+
+        .phone-info-row:last-child { border-bottom: none; }
+        .phone-info-label { color: var(--text-secondary); }
+        .phone-info-value { color: var(--text-primary); font-weight: 500; }
+
+        /* Dead Contacts Section */
+        .dead-contacts-section {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .dead-count {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: rgba(255, 68, 102, 0.1);
+            border-radius: var(--radius-sm);
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        .dead-count-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--error);
+        }
+
+        /* Main Panel */
+        .main-panel {
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px;
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .char-count {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-family: monospace;
+        }
+
+        .message-textarea {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.5;
+            font-family: inherit;
+        }
+
+        /* Opt-out toggle */
+        .options-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 12px;
+            padding: 12px;
+            background: var(--bg-input);
+            border-radius: var(--radius-sm);
+        }
+
+        .toggle-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .toggle-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent);
+        }
+
+        .opt-out-preview {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-left: auto;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .recipient-info {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .recipient-info strong { color: var(--accent); }
+
+        /* Progress */
+        .progress-bar-bg {
+            background: var(--bg-input);
+            border-radius: 10px;
+            height: 16px;
+            overflow: hidden;
+            margin: 16px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--success));
+            transition: width 0.3s;
+            border-radius: 10px;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .stat-box {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            background: var(--bg-input);
+            border-radius: var(--radius-sm);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            font-family: monospace;
+        }
+
+        .stat-value.sent { color: var(--success); }
+        .stat-value.failed { color: var(--error); }
+        .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+        /* Right Panel - Contacts */
+        .contacts-panel {
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .contacts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .contacts-actions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .contacts-actions .btn {
+            flex: 1;
+            padding: 8px;
+            font-size: 12px;
+        }
+
+        .contacts-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            margin-bottom: 8px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .contact-item:hover { border-color: var(--accent); }
+        .contact-item.selected { border-color: var(--success); background: rgba(0, 255, 136, 0.05); }
+        .contact-item.dead { opacity: 0.5; border-color: var(--error); }
+        .contact-item.opted-out { opacity: 0.5; border-color: var(--warning); }
+
+        .contact-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--success);
+        }
+
+        .contact-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 12px;
+            color: #000;
+        }
+
+        .contact-avatar.dead { background: var(--error); }
+        .contact-avatar.opted-out { background: var(--warning); }
+
+        .contact-info { flex: 1; min-width: 0; }
+        .contact-name { font-size: 13px; font-weight: 500; }
+        .contact-phone { font-size: 11px; color: var(--text-secondary); font-family: monospace; }
+        .contact-badge {
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .contact-badge.dead { background: var(--error); color: #000; }
+        .contact-badge.opted-out { background: var(--warning); color: #000; }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.5; }
+
+        /* Status messages */
+        .status-area { margin-top: 12px; }
+        
+        .status-msg {
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-msg.info { background: rgba(0, 212, 255, 0.1); color: var(--accent); }
+        .status-msg.success { background: rgba(0, 255, 136, 0.1); color: var(--success); }
+        .status-msg.error { background: rgba(255, 68, 102, 0.1); color: var(--error); }
+        .status-msg.warning { background: rgba(255, 170, 0, 0.1); color: var(--warning); }
+
+        .loading-spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Tabs for contacts */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 12px;
+            background: var(--bg-input);
+            padding: 4px;
+            border-radius: var(--radius-sm);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 8px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+        }
+
+        .tab:hover { color: var(--text-primary); }
+        .tab.active { background: var(--accent); color: #000; }
+        .tab.dead-tab.active { background: var(--error); }
+        .tab.opted-tab.active { background: var(--warning); }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">ClubSMS</div>
+            <div class="connection-badge disconnected" id="badge">
+                <div class="connection-dot"></div>
+                <span id="badge-text">Disconnected</span>
+            </div>
+            <div class="header-stats">
+                <div class="header-stat warning" id="opted-out-stat" style="display: none;">
+                    <span>🚫</span>
+                    <span><span id="header-opted">0</span> Opted Out</span>
+                </div>
+                <div class="header-stat error" id="dead-stat" style="display: none;">
+                    <span>💀</span>
+                    <span><span id="header-dead">0</span> Dead</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="section-title">Phone Connection</div>
+            <div class="input-group">
+                <label class="input-label">Phone IP Address</label>
+                <input type="text" id="ip-input" placeholder="192.168.0.xxx">
+            </div>
+            <button class="btn btn-primary" id="connect-btn">Connect to Phone</button>
+
+            <div id="phone-info" style="display: none;">
+                <div class="phone-info">
+                    <div class="phone-info-row">
+                        <span class="phone-info-label">Model</span>
+                        <span class="phone-info-value" id="info-model">-</span>
+                    </div>
+                    <div class="phone-info-row">
+                        <span class="phone-info-label">Android</span>
+                        <span class="phone-info-value" id="info-android">-</span>
+                    </div>
+                    <div class="phone-info-row">
+                        <span class="phone-info-label">Battery</span>
+                        <span class="phone-info-value" id="info-battery">-</span>
+                    </div>
+                </div>
+                <button class="btn btn-danger" id="disconnect-btn" style="margin-top: 12px;">Disconnect</button>
+            </div>
+
+            <!-- Dead Contacts Management -->
+            <div class="dead-contacts-section" id="dead-section" style="display: none;">
+                <div class="section-title">📋 Contact Cleanup</div>
+                <div class="dead-count">
+                    <div>
+                        <div class="dead-count-number" id="dead-count">0</div>
+                        <div style="font-size: 11px; color: var(--text-muted);">Undeliverable</div>
+                    </div>
+                    <div>
+                        <div class="dead-count-number" id="opted-count" style="color: var(--warning);">0</div>
+                        <div style="font-size: 11px; color: var(--text-muted);">Opted Out</div>
+                    </div>
+                </div>
+                <button class="btn btn-warning" id="export-dead-btn" style="margin-bottom: 8px;">
+                    📥 Export Dead Numbers
+                </button>
+                <button class="btn btn-secondary" id="clear-dead-btn">
+                    🗑️ Clear Dead List
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-panel">
+            <div class="card">
+                <div class="card-title">
+                    <span>📝 Compose Message</span>
+                    <span class="char-count"><span id="char-count">0</span>/1000</span>
+                </div>
+                <textarea class="message-textarea" id="message" placeholder="Type your message here..." maxlength="1000"></textarea>
+                
+                <div class="options-row">
+                    <label class="toggle-option">
+                        <input type="checkbox" id="opt-out-toggle" checked>
+                        <span>Include opt-out text</span>
+                    </label>
+                    <span class="opt-out-preview" id="opt-out-preview">+ "Reply STOP to unsubscribe"</span>
+                </div>
+
+                <div class="card-footer">
+                    <span class="recipient-info">Sending to <strong id="recipient-count">0</strong> recipients</span>
+                    <button class="btn btn-success" id="send-btn" style="width: auto; padding: 12px 24px;" disabled>🚀 Send</button>
+                </div>
+            </div>
+
+            <div class="card" id="progress-card" style="display: none;">
+                <div class="card-title">
+                    <span id="progress-title">📤 Sending...</span>
+                    <span id="progress-pct">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <div class="stat-value sent" id="stat-sent">0</div>
+                        <div class="stat-label">Sent</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value failed" id="stat-failed">0</div>
+                        <div class="stat-label">Failed</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="status-area" id="status-area"></div>
+        </main>
+
+        <!-- Right Panel - Contacts -->
+        <aside class="contacts-panel">
+            <div class="contacts-header">
+                <div class="section-title">Recipients</div>
+                <button class="btn btn-secondary" id="refresh-btn" style="width: auto; padding: 6px 12px; font-size: 11px;">↻</button>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="active">Active</div>
+                <div class="tab dead-tab" data-tab="dead">Dead</div>
+                <div class="tab opted-tab" data-tab="opted">Opted Out</div>
+            </div>
+
+            <input type="text" id="search" placeholder="🔍 Search...">
+            <div class="contacts-actions">
+                <button class="btn btn-secondary" id="select-all">All</button>
+                <button class="btn btn-secondary" id="select-none">None</button>
+            </div>
+            <div class="contacts-list" id="contacts-list">
+                <div class="empty-state">
+                    <div class="empty-icon">📱</div>
+                    <p>Connect to phone to load contacts</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // State
+        let state = {
+            connected: false,
+            contacts: [],
+            selected: new Set(),
+            sending: false,
+            deadContacts: new Set(JSON.parse(localStorage.getItem('deadContacts') || '[]')),
+            optedOutContacts: new Set(JSON.parse(localStorage.getItem('optedOutContacts') || '[]')),
+            currentTab: 'active'
+        };
+
+        // Elements
+        const $ = id => document.getElementById(id);
+        const ipInput = $('ip-input');
+        const connectBtn = $('connect-btn');
+        const disconnectBtn = $('disconnect-btn');
+        const badge = $('badge');
+        const badgeText = $('badge-text');
+        const phoneInfo = $('phone-info');
+        const messageInput = $('message');
+        const charCount = $('char-count');
+        const recipientCount = $('recipient-count');
+        const sendBtn = $('send-btn');
+        const contactsList = $('contacts-list');
+        const searchInput = $('search');
+        const progressCard = $('progress-card');
+        const progressBar = $('progress-bar');
+        const progressPct = $('progress-pct');
+        const progressTitle = $('progress-title');
+        const statusArea = $('status-area');
+        const optOutToggle = $('opt-out-toggle');
+        const optOutPreview = $('opt-out-preview');
+        const deadSection = $('dead-section');
+
+        // Opt-out text
+        const OPT_OUT_TEXT = '\n\nReply STOP to unsubscribe';
+
+        // Tab handling
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.onclick = () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                state.currentTab = tab.dataset.tab;
+                renderContacts();
+            };
+        });
+
+        // Opt-out toggle
+        optOutToggle.onchange = () => {
+            optOutPreview.style.display = optOutToggle.checked ? 'inline' : 'none';
+        };
+
+        // Connect
+        connectBtn.onclick = async () => {
+            const ip = ipInput.value.trim();
+            if (!ip) return showStatus('Enter phone IP address', 'error');
+            
+            connectBtn.disabled = true;
+            connectBtn.innerHTML = '<span class="loading-spinner"></span> Connecting...';
+            
+            try {
+                const result = await window.clubsms.connect(ip);
+                if (!result.success) throw new Error(result.error || 'Connection failed');
+            } catch (e) {
+                showStatus('Connection failed: ' + e.message, 'error');
+                connectBtn.disabled = false;
+                connectBtn.textContent = 'Connect to Phone';
+            }
+        };
+
+        // Disconnect
+        disconnectBtn.onclick = async () => {
+            await window.clubsms.disconnect();
+            setDisconnected();
+        };
+
+        // Message input
+        messageInput.oninput = () => {
+            charCount.textContent = messageInput.value.length;
+            updateSendBtn();
+        };
+
+        // Search
+        searchInput.oninput = renderContacts;
+
+        // Select all/none
+        $('select-all').onclick = () => {
+            const filtered = getFilteredContacts();
+            filtered.forEach(c => {
+                if (!state.deadContacts.has(c.phone) && !state.optedOutContacts.has(c.phone)) {
+                    state.selected.add(c.id);
+                }
+            });
+            renderContacts();
+            updateSendBtn();
+        };
+        $('select-none').onclick = () => { state.selected.clear(); renderContacts(); updateSendBtn(); };
+
+        // Refresh contacts
+        $('refresh-btn').onclick = () => { if (state.connected) window.clubsms.getContacts(); };
+
+        // Export dead contacts
+        $('export-dead-btn').onclick = () => {
+            const deadList = Array.from(state.deadContacts);
+            if (deadList.length === 0) {
+                showStatus('No dead contacts to export', 'info');
+                return;
+            }
+            
+            // Create CSV content
+            let csv = 'Phone Number,Name\n';
+            deadList.forEach(phone => {
+                const contact = state.contacts.find(c => c.phone === phone);
+                const name = contact ? contact.name : 'Unknown';
+                csv += `${phone},"${name}"\n`;
+            });
+            
+            // Download
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `dead_contacts_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showStatus(`Exported ${deadList.length} dead contacts`, 'success');
+        };
+
+        // Clear dead contacts
+        $('clear-dead-btn').onclick = () => {
+            if (confirm('Clear the dead contacts list? This will allow you to try sending to them again.')) {
+                state.deadContacts.clear();
+                localStorage.setItem('deadContacts', '[]');
+                updateDeadStats();
+                renderContacts();
+                showStatus('Dead contacts list cleared', 'success');
+            }
+        };
+
+        // Send
+        sendBtn.onclick = async () => {
+            if (state.sending) return;
+            let msg = messageInput.value.trim();
+            
+            // Add opt-out text if enabled
+            if (optOutToggle.checked) {
+                msg += OPT_OUT_TEXT;
+            }
+            
+            const recipients = state.contacts
+                .filter(c => state.selected.has(c.id))
+                .filter(c => !state.deadContacts.has(c.phone) && !state.optedOutContacts.has(c.phone))
+                .map(c => ({ phone: c.phone, name: c.name, contact_id: c.id }));
+            
+            if (!msg || !recipients.length) return;
+
+            state.sending = true;
+            sendBtn.disabled = true;
+            progressCard.style.display = 'block';
+            progressTitle.textContent = '📤 Sending...';
+            
+            const result = await window.clubsms.sendSMS(recipients, msg);
+            if (result.success) showStatus('Broadcast started', 'info');
+            else { showStatus('Failed to send', 'error'); state.sending = false; sendBtn.disabled = false; }
+        };
+
+        // Event handlers
+        window.clubsms.onPhoneConnected(data => {
+            setConnected(data);
+            window.clubsms.getContacts();
+        });
+
+        window.clubsms.onConnectionStatus(data => {
+            if (!data.connected) { setDisconnected(); showStatus('Lost connection', 'error'); }
+        });
+
+        window.clubsms.onContactsList(data => {
+            state.contacts = data.contacts || [];
+            renderContacts();
+            updateDeadStats();
+            showStatus('Loaded ' + state.contacts.length + ' contacts', 'success');
+        });
+
+        window.clubsms.onBroadcastProgress(data => {
+            const pct = data.percent_complete;
+            progressBar.style.width = pct + '%';
+            progressPct.textContent = pct + '%';
+            $('stat-sent').textContent = data.statistics.sent;
+            $('stat-failed').textContent = data.statistics.failed;
+        });
+
+        window.clubsms.onDeliveryStatus(data => {
+            // Track failed deliveries
+            if (data.status === 'FAILED' || data.status === 'UNDELIVERABLE') {
+                const phone = data.recipient?.phone || data.phone_number;
+                if (phone) {
+                    state.deadContacts.add(phone);
+                    localStorage.setItem('deadContacts', JSON.stringify(Array.from(state.deadContacts)));
+                    updateDeadStats();
+                    showStatus(`Failed: ${data.recipient?.name || phone} - ${data.error_message || 'Undeliverable'}`, 'error');
+                }
+            }
+        });
+
+        window.clubsms.onBroadcastComplete(data => {
+            state.sending = false;
+            sendBtn.disabled = false;
+            progressBar.style.width = '100%';
+            progressPct.textContent = '100%';
+            $('stat-sent').textContent = data.final_statistics.sent;
+            $('stat-failed').textContent = data.final_statistics.failed;
+            progressTitle.textContent = '✅ Complete!';
+            
+            showStatus(`Done! Sent: ${data.final_statistics.sent}, Failed: ${data.final_statistics.failed}`, 
+                data.final_statistics.failed > 0 ? 'error' : 'success');
+            
+            messageInput.value = '';
+            charCount.textContent = '0';
+            renderContacts();
+            
+            setTimeout(() => {
+                progressCard.style.display = 'none';
+                progressBar.style.width = '0%';
+            }, 5000);
+        });
+
+        window.clubsms.onError(data => showStatus('Error: ' + data.error_message, 'error'));
+
+        // Handle opt-out messages from phone
+        window.clubsms.onOptOut(data => {
+            const phone = data.phone_number;
+            if (phone) {
+                state.optedOutContacts.add(phone);
+                localStorage.setItem('optedOutContacts', JSON.stringify(Array.from(state.optedOutContacts)));
+                updateDeadStats();
+                renderContacts();
+                showStatus(`📵 ${phone} replied STOP - marked as opted out`, 'warning');
+            }
+        });
+
+        // Helpers
+        function setConnected(data) {
+            state.connected = true;
+            badge.className = 'connection-badge connected';
+            badgeText.textContent = 'Connected';
+            connectBtn.disabled = false;
+            connectBtn.textContent = 'Connect to Phone';
+            phoneInfo.style.display = 'block';
+            deadSection.style.display = 'block';
+            $('info-model').textContent = data.phone_info?.model || '-';
+            $('info-android').textContent = data.phone_info?.android_version || '-';
+            $('info-battery').textContent = (data.phone_info?.battery_level || 0) + '%';
+            showStatus('Connected to ' + (data.phone_info?.model || 'phone'), 'success');
+        }
+
+        function setDisconnected() {
+            state.connected = false;
+            state.contacts = [];
+            state.selected.clear();
+            badge.className = 'connection-badge disconnected';
+            badgeText.textContent = 'Disconnected';
+            connectBtn.disabled = false;
+            connectBtn.textContent = 'Connect to Phone';
+            phoneInfo.style.display = 'none';
+            deadSection.style.display = 'none';
+            renderContacts();
+            updateSendBtn();
+        }
+
+        function getFilteredContacts() {
+            const search = searchInput.value.toLowerCase();
+            return state.contacts.filter(c => {
+                const matchesSearch = c.name.toLowerCase().includes(search) || c.phone.includes(search);
+                const isDead = state.deadContacts.has(c.phone);
+                const isOptedOut = state.optedOutContacts.has(c.phone);
+                
+                if (state.currentTab === 'active') return matchesSearch && !isDead && !isOptedOut;
+                if (state.currentTab === 'dead') return matchesSearch && isDead;
+                if (state.currentTab === 'opted') return matchesSearch && isOptedOut;
+                return matchesSearch;
+            });
+        }
+
+        function renderContacts() {
+            const filtered = getFilteredContacts();
+            
+            if (!filtered.length) {
+                const emptyMsg = state.connected 
+                    ? (state.currentTab === 'dead' ? 'No dead contacts yet' : 
+                       state.currentTab === 'opted' ? 'No opted-out contacts' : 'No matches')
+                    : 'Connect to load contacts';
+                contactsList.innerHTML = `<div class="empty-state"><div class="empty-icon">${state.connected ? '🔍' : '📱'}</div><p>${emptyMsg}</p></div>`;
+                return;
+            }
+
+            contactsList.innerHTML = filtered.map(c => {
+                const isDead = state.deadContacts.has(c.phone);
+                const isOptedOut = state.optedOutContacts.has(c.phone);
+                const sel = state.selected.has(c.id) && !isDead && !isOptedOut;
+                const initials = c.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                
+                let itemClass = 'contact-item';
+                if (sel) itemClass += ' selected';
+                if (isDead) itemClass += ' dead';
+                if (isOptedOut) itemClass += ' opted-out';
+                
+                let avatarClass = 'contact-avatar';
+                if (isDead) avatarClass += ' dead';
+                if (isOptedOut) avatarClass += ' opted-out';
+                
+                let badge = '';
+                if (isDead) badge = '<span class="contact-badge dead">DEAD</span>';
+                if (isOptedOut) badge = '<span class="contact-badge opted-out">STOP</span>';
+                
+                return `<div class="${itemClass}" data-id="${c.id}" data-phone="${c.phone}">
+                    <input type="checkbox" class="contact-checkbox" ${sel ? 'checked' : ''} ${isDead || isOptedOut ? 'disabled' : ''}>
+                    <div class="${avatarClass}">${initials}</div>
+                    <div class="contact-info">
+                        <div class="contact-name">${c.name} ${badge}</div>
+                        <div class="contact-phone">${c.phone}</div>
+                    </div>
+                </div>`;
+            }).join('');
+
+            contactsList.querySelectorAll('.contact-item').forEach(el => {
+                el.onclick = () => {
+                    const id = el.dataset.id;
+                    const phone = el.dataset.phone;
+                    const isDead = state.deadContacts.has(phone);
+                    const isOptedOut = state.optedOutContacts.has(phone);
+                    
+                    if (isDead || isOptedOut) return; // Can't select dead or opted-out
+                    
+                    state.selected.has(id) ? state.selected.delete(id) : state.selected.add(id);
+                    renderContacts();
+                    updateSendBtn();
+                };
+            });
+
+            recipientCount.textContent = state.selected.size;
+        }
+
+        function updateSendBtn() {
+            const validSelected = Array.from(state.selected).filter(id => {
+                const contact = state.contacts.find(c => c.id === id);
+                return contact && !state.deadContacts.has(contact.phone) && !state.optedOutContacts.has(contact.phone);
+            });
+            sendBtn.disabled = !messageInput.value.trim() || !validSelected.length || !state.connected || state.sending;
+            recipientCount.textContent = validSelected.length;
+        }
+
+        function updateDeadStats() {
+            const deadCount = state.deadContacts.size;
+            const optedCount = state.optedOutContacts.size;
+            
+            $('dead-count').textContent = deadCount;
+            $('opted-count').textContent = optedCount;
+            $('header-dead').textContent = deadCount;
+            $('header-opted').textContent = optedCount;
+            
+            $('dead-stat').style.display = deadCount > 0 ? 'flex' : 'none';
+            $('opted-out-stat').style.display = optedCount > 0 ? 'flex' : 'none';
+        }
+
+        function showStatus(msg, type = 'info') {
+            const el = document.createElement('div');
+            el.className = 'status-msg ' + type;
+            const icons = { success: '✓', error: '✗', warning: '⚠', info: 'ℹ' };
+            el.innerHTML = `<span>${icons[type] || 'ℹ'}</span> ${msg}`;
+            statusArea.insertBefore(el, statusArea.firstChild);
+            while (statusArea.children.length > 5) statusArea.removeChild(statusArea.lastChild);
+            setTimeout(() => el.remove(), 10000);
+        }
+
+        // Initialize
+        updateDeadStats();
+        updateSendBtn();
+    </script>
+</body>
+</html>

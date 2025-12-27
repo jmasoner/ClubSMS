@@ -1,0 +1,43 @@
+{
+  "name": "clubsms-desktop",
+  "version": "2.0.0",
+  "description": "ClubSMS Desktop App - Control SMS broadcasting from your computer",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run watch\" \"electron .\"",
+    "watch": "esbuild src/renderer.jsx --bundle --outfile=dist/renderer.js --watch",
+    "build": "esbuild src/renderer.jsx --bundle --outfile=dist/renderer.js --minify",
+    "package": "electron-builder",
+    "package:win": "electron-builder --win"
+  },
+  "author": "ClubSMS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1",
+    "esbuild": "^0.19.11"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ws": "^8.16.0"
+  },
+  "build": {
+    "appId": "com.clubsms.desktop",
+    "productName": "ClubSMS Desktop",
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
+

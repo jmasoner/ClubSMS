@@ -1,0 +1,350 @@
+apply plugin: 'com.android.application'
+
+/**
+ * ClubSMS App - Gradle Build Configuration
+ * 
+ * Configures the Android build process for the Club SMS Broadcasting app.
+ * Includes:
+ * - SDK versions and compatibility settings
+ * - Build variants (debug/release) with optimization
+ * - Dependencies for UI, data management, and networking
+ * - ProGuard configuration for release builds
+ * - Signing configurations for app distribution
+ * 
+ * Build Requirements:
+ * - Android SDK 34 (API level 34)
+ * - Android Gradle Plugin 8.0+
+ * - Java 8+ language features
+ * - AndroidX libraries for modern compatibility
+ * 
+ * @author John (Electrical Engineer)
+ * @version 1.0
+ * @since 2024-12-24
+ */
+
+android {
+    namespace 'com.clubsms'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.clubsms"
+        minSdk 21        // Android 5.0 - Wide compatibility
+        targetSdk 34     // Latest Android features
+        versionCode 1    // Initial release
+        versionName "1.0.0"
+
+        // Test configuration
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        
+        // Enable vector drawables for older Android versions
+        vectorDrawables.useSupportLibrary = true
+        
+        // Multi-language support preparation
+        resConfigs "en", "es", "fr"  // English, Spanish, French
+        
+        // Build configuration fields
+        buildConfigField "String", "BUILD_TIME", "\"${getBuildTime()}\""
+        buildConfigField "boolean", "ENABLE_LOGGING", "true"
+    }
+
+    buildTypes {
+        debug {
+            // Development build configuration
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            
+            // Debug-specific settings
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+            
+            // Enable additional logging
+            buildConfigField "boolean", "DEBUG_MODE", "true"
+            buildConfigField "String", "LOG_LEVEL", "\"VERBOSE\""
+            
+            // Manifest placeholders for debug
+            manifestPlaceholders = [
+                appName: "@string/app_name_debug",
+                enableCrashReporting: "false"
+            ]
+        }
+
+        release {
+            // Production build configuration
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            
+            // Code obfuscation and optimization
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            
+            // Production-specific settings
+            buildConfigField "boolean", "DEBUG_MODE", "false"
+            buildConfigField "String", "LOG_LEVEL", "\"ERROR\""
+            
+            // Manifest placeholders for release
+            manifestPlaceholders = [
+                appName: "@string/app_name",
+                enableCrashReporting: "true"
+            ]
+            
+            // Signing configuration (keystore required for distribution)
+            signingConfig signingConfigs.release
+        }
+        
+        // Beta testing build variant
+        beta {
+            initWith release
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            
+            applicationIdSuffix ".beta"
+            versionNameSuffix "-beta"
+            
+            buildConfigField "boolean", "DEBUG_MODE", "false"
+            buildConfigField "String", "LOG_LEVEL", "\"DEBUG\""
+            
+            manifestPlaceholders = [
+                appName: "@string/app_name_beta",
+                enableCrashReporting: "true"
+            ]
+        }
+    }
+
+    // Signing configurations for app distribution
+    signingConfigs {
+        debug {
+            // Debug keystore (auto-generated)
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        
+        release {
+            // Production keystore (must be created separately)
+            // For security, store passwords in gradle.properties (not in git)
+            storeFile file('release.keystore')
+            storePassword project.findProperty('STORE_PASSWORD') ?: ''
+            keyAlias project.findProperty('KEY_ALIAS') ?: ''
+            keyPassword project.findProperty('KEY_PASSWORD') ?: ''
+        }
+    }
+
+    // Compilation options
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+        
+        // Enable desugaring for newer Java features on older Android
+        coreLibraryDesugaringEnabled true
+    }
+    
+    // Lint configuration - Code quality checks
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+        disable 'MissingTranslation'  // Handle missing translations gracefully
+        enable 'UnusedResources', 'IconMissingDensityFolder'
+    }
+    
+    // Packaging options
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/NOTICE']
+        }
+    }
+    
+    // Build features
+    buildFeatures {
+        buildConfig true
+        viewBinding true  // Enable view binding for type-safe view access
+    }
+}
+
+/**
+ * Dependencies Configuration
+ * 
+ * Organized by category for easier maintenance:
+ * - AndroidX Core Libraries
+ * - UI and Material Design Components  
+ * - Data Management and Persistence
+ * - Networking and JSON Processing
+ * - Testing Frameworks
+ */
+dependencies {
+    
+    // Core Desugaring for Java 8+ features on older Android versions
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+    
+    // AndroidX Core Libraries
+    implementation 'androidx.core:core:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.activity:activity:1.8.2'
+    implementation 'androidx.fragment:fragment:1.6.2'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.7.0'
+    
+    // UI and Material Design Components
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    
+    // Navigation Components (for future multi-screen features)
+    implementation 'androidx.navigation:navigation-fragment:2.7.6'
+    implementation 'androidx.navigation:navigation-ui:2.7.6'
+    
+    // Data Management and Persistence
+    implementation 'androidx.preference:preference:1.2.1'
+    implementation 'androidx.work:work-runtime:2.9.0'  // Background tasks
+    
+    // JSON Processing - Gson for data serialization
+    implementation 'com.google.code.gson:gson:2.10.1'
+    
+    // Permissions Handling - Simplified permission requests
+    implementation 'com.karumi:dexter:6.2.3'
+    
+    // Image Loading and Caching (for future contact photos)
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+    
+    // Date and Time Utilities
+    implementation 'org.apache.commons:commons-lang3:3.14.0'
+    
+    // Logging - Better debugging and error tracking
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+    
+    // CSV Processing - For data export/import features
+    implementation 'com.opencsv:opencsv:5.9'
+    
+    // Testing Dependencies
+    
+    // Unit Testing
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:5.8.0'
+    testImplementation 'org.robolectric:robolectric:4.11.1'  // Android unit tests
+    
+    // Android Instrumentation Testing
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    
+    // UI Testing
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    
+    // Debug-only dependencies
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'  // Memory leak detection
+}
+
+/**
+ * Custom Build Tasks and Functions
+ */
+
+/**
+ * Generate build timestamp for version tracking
+ */
+def getBuildTime() {
+    return new Date().format("yyyy-MM-dd HH:mm:ss")
+}
+
+/**
+ * Custom task to generate APK with timestamp in filename
+ */
+task renameApk {
+    doLast {
+        def buildTime = new Date().format("yyyyMMdd_HHmm")
+        def apkDir = file("${buildDir}/outputs/apk/release/")
+        
+        if (apkDir.exists()) {
+            apkDir.listFiles().each { file ->
+                if (file.name.endsWith('-release.apk')) {
+                    def newName = "ClubSMS-v${android.defaultConfig.versionName}-${buildTime}.apk"
+                    file.renameTo(new File(apkDir, newName))
+                    println "APK renamed to: ${newName}"
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Task to copy APK to distribution folder
+ */
+task copyApkToDistribution(type: Copy) {
+    dependsOn assembleRelease, renameApk
+    
+    from "${buildDir}/outputs/apk/release/"
+    into "${rootProject.projectDir}/distribution/"
+    include "ClubSMS-*.apk"
+    
+    doLast {
+        println "APK copied to distribution folder"
+    }
+}
+
+/**
+ * Task to generate build info file
+ */
+task generateBuildInfo {
+    doLast {
+        def buildInfoFile = file("${buildDir}/outputs/build_info.txt")
+        buildInfoFile.parentFile.mkdirs()
+        
+        def buildInfo = """
+            ClubSMS Build Information
+            =========================
+            Version: ${android.defaultConfig.versionName} (${android.defaultConfig.versionCode})
+            Build Time: ${getBuildTime()}
+            Build Type: Release
+            Min SDK: ${android.defaultConfig.minSdk}
+            Target SDK: ${android.defaultConfig.targetSdk}
+            Application ID: ${android.defaultConfig.applicationId}
+            
+            Features:
+            - SMS Broadcasting
+            - Contact Management  
+            - Message History
+            - Export/Import Data
+            - Opt-out Management
+            
+            Permissions Required:
+            - SEND_SMS (Core functionality)
+            - READ_CONTACTS (Import contacts)
+            - READ_SMS (Message verification)
+            - INTERNET (Future cloud features)
+            
+            Build Configuration:
+            - Code Minification: Enabled
+            - Resource Shrinking: Enabled
+            - ProGuard: Enabled
+            - Crash Reporting: Enabled
+        """.stripIndent()
+        
+        buildInfoFile.text = buildInfo
+        println "Build info generated: ${buildInfoFile.absolutePath}"
+    }
+}
+
+// Connect custom tasks to main build process
+afterEvaluate {
+    assembleRelease.finalizedBy renameApk, generateBuildInfo
+}
+
+/**
+ * Additional Configuration
+ */
+
+// Exclude unnecessary files from final APK to reduce size
+android.applicationVariants.all { variant ->
+    variant.outputs.all { output ->
+        // Custom APK naming for better version tracking
+        def buildTime = new Date().format("yyyyMMdd")
+        def newName = "ClubSMS-${variant.versionName}-${buildTime}.apk"
+        outputFileName = newName
+    }
+}

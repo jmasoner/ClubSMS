@@ -1,0 +1,37 @@
+# Node.js
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Electron build output
+desktop-app/dist/
+desktop-app/out/
+
+# Android build output
+source_code/build/
+source_code/app/build/
+source_code/.gradle/
+source_code/local.properties
+
+# Gradle
+.gradle/
+*.gradle.lockfile
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+
+# APK files (too large for git)
+*.apk
+

@@ -1,0 +1,73 @@
+# Ignore build outputs
+/build/
+/app/build/
+*.apk
+*.aab
+
+# Ignore IDE files
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# Ignore OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Ignore gradle files
+.gradle/
+gradle.properties
+local.properties
+
+# Ignore keystore files (security)
+*.keystore
+*.jks
+
+# Ignore logs
+*.log
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore backup files
+*.bak
+*~
+
+# Android Studio
+captures/
+.externalNativeBuild/
+.cxx/
+
+# NDK
+obj/
+
+# IntelliJ
+out/
+
+# Keystore files (keep secure)
+release.keystore
+debug.keystore
+
+# Generated files
+bin/
+gen/
+lint-report.html
+
+# Proguard outputs
+mapping.txt
+seeds.txt
+usage.txt
+
+# Maven
+target/
+
+# Gradle Wrapper (keep these)
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties

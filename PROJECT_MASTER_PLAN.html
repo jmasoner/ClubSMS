@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClubSMS v2.0 - Project Master Plan</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <style>
+      /* Document Layout Reset */
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 40px 80px;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 11pt;
+        line-height: 1.4;
+        color: #000;
+        background-color: #fff;
+      }
+
+      /* Typography Override */
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #1a1a1a;
+        margin-top: 24px;
+        margin-bottom: 12px;
+        font-weight: bold;
+      }
+
+      h1 {
+        font-size: 24pt;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      h2 {
+        font-size: 16pt;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+        margin-top: 32px;
+        background-color: #f5f5f5;
+        padding: 8px;
+      }
+
+      h3 {
+        font-size: 13pt;
+        color: #333;
+        margin-top: 20px;
+      }
+
+      h4 {
+        font-size: 11pt;
+        text-decoration: underline;
+      }
+
+      p {
+        margin-bottom: 10px;
+        text-align: justify;
+      }
+
+      /* Code Blocks */
+      pre,
+      code {
+        font-family: 'Courier New', Courier, monospace;
+        background-color: #f4f4f4;
+        font-size: 10pt;
+      }
+
+      pre {
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow-x: hidden;
+        white-space: pre-wrap;
+      }
+
+      /* Tables */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        font-size: 10pt;
+        font-family: Arial, sans-serif;
+      }
+
+      th,
+      td {
+        border: 1px solid #000;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #e0e0e0;
+        font-weight: bold;
+      }
+
+      /* Lists */
+      ul,
+      ol {
+        margin-bottom: 10px;
+        padding-left: 25px;
+      }
+
+      li {
+        margin-bottom: 4px;
+      }
+
+      /* Alert Boxes */
+      .alert {
+        padding: 15px;
+        margin: 15px 0;
+        border: 1px solid transparent;
+        font-family: Arial, sans-serif;
+        font-size: 10pt;
+      }
+
+      .alert-info {
+        color: #0c5460;
+        background-color: #d1ecf1;
+        border-color: #bee5eb;
+      }
+
+      .alert-warning {
+        color: #856404;
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+      }
+
+      .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+      }
+
+      /* Meta Info */
+      .document-meta {
+        margin-bottom: 40px;
+        border-bottom: 4px solid #000;
+        padding-bottom: 20px;
+      }
+
+      .meta-row {
+        display: flex;
+        justify-content: space-between;
+        font-family: Arial, sans-serif;
+        font-size: 10pt;
+      }
+
+      .page-break {
+        page-break-after: always;
+      }
+
+      .ascii-art {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 9pt;
+        line-height: 1.1;
+        white-space: pre;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="document-meta">
+      <h1 style="border: none; margin-bottom: 0">PROJECT MASTER PLAN</h1>
+      <h2 style="border: none; background: none; margin-top: 0; padding: 0; color: #555">
+        ClubSMS v2.0 Development Sprint
+      </h2>
+      <br />
+      <div class="meta-row">
+        <div><strong>Date:</strong> December 25, 2025</div>
+        <div><strong>Project Lead:</strong> Genspark (AI Architect)</div>
+      </div>
+      <div class="meta-row">
+        <div><strong>Target System:</strong> Windows 11 / Android 13</div>
+        <div><strong>Repository:</strong> github.com/jmasoner/ClubSMS</div>
+      </div>
+      <div class="meta-row">
+        <div><strong>Sprint Duration:</strong> 1 Day (10.5 Hours)</div>
+        <div><strong>Status:</strong> <span style="color: green; font-weight: bold">APPROVED</span></div>
+      </div>
+    </div>
+
+    <!-- 1. Executive Summary -->
+    <h1>1. Executive Summary</h1>
+    <p>
+      The goal of this intensive 1-day sprint is to upgrade the ClubSMS platform from a standalone Android application
+      to a <strong>comprehensive desktop-mobile hybrid system</strong>. The new architecture enables club organizers to
+      manage contacts and compose messages on a Windows desktop environment while leveraging their Android device's
+      cellular connection for message delivery.
+    </p>
+
+    <h3>Strategic Objectives</h3>
+    <ul>
+      <li>
+        <strong>Professional Workflow:</strong> Shift management and composition to the Desktop (Windows 11) for
+        efficiency.
+      </li>
+      <li>
+        <strong>Rich Media Support:</strong> Implement MMS capabilities to support image broadcasting alongside SMS.
+      </li>
+      <li>
+        <strong>Privacy & Security:</strong> Maintain a "Local-First" architecture using local WiFi/Network bridging,
+        eliminating cloud dependencies.
+      </li>
+    </ul>
+
+    <h3>Success Criteria</h3>
+    <ul>
+      <li>✅ Functional Electron Desktop App running on Windows 11.</li>
+      <li>✅ Android Companion App successfully receiving commands in background.</li>
+      <li>✅ Successful sending of 1 SMS and 1 MMS (Image) via Desktop trigger.</li>
+      <li>✅ Contact synchronization between Desktop and Phone.</li>
+      <li>✅ Zero data leakage to external cloud servers.</li>
+    </ul>
+
+    <div class="alert alert-info">
+      <strong>Note:</strong> This is an aggressive timeline. All agents must adhere strictly to the API specifications
+      defined in Section 4 to ensure seamless integration at 5:30 PM.
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- 2. System Architecture -->
+    <h1>2. System Architecture</h1>
+
+    <p>
+      The system utilizes a <strong>Master-Slave</strong> architecture where the Desktop App acts as the command center
+      (Master) and the Android device acts as the cellular modem (Slave). Communication occurs over a secure local
+      WebSocket connection.
+    </p>
+
+    <div class="ascii-art">
+      +-------------------------+ +----------------------------+ | WINDOWS DESKTOP PC | | ANDROID PHONE (S20 5G) | |
+      (Master Node) | | (Worker Node) | | | | | | +-------------------+ | | +----------------------+ | | | ELECTRON APP
+      | | | | COMPANION SERVICE | | | | (React Frontend) | | WiFi | | (Background Service)| | | | [SQLite DB]
+      |<------------->| | [SmsManager API] | | | | [WebSocket Srvr] | | WebSocket | | [MMS API] | | |
+      +-------------------+ | (JSON) | +----------+-----------+ | | ^ | | | | +-----------|-------------+
+      +-------------|--------------+ | | | v +------+------+ (( CELLULAR NETWORK )) | LOCAL FILE | (SMS / MMS) | SYSTEM
+      | | +-------------+ v [ CLUB MEMBERS ]
+    </div>
+
+    <h3>Component Overview</h3>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Tech Stack</th>
+          <th>Responsibility</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Desktop App</strong></td>
+          <td>Electron, React, SQLite, Node.js</td>
+          <td>User Interface, Data Persistence, Command Generation, Network Bridge Host.</td>
+        </tr>
+        <tr>
+          <td><strong>Android App v2</strong></td>
+          <td>Java/Kotlin, Android SDK 33</td>
+          <td>Standard Mobile UI (legacy), MMS Composition, Contact Export.</td>
+        </tr>
+        <tr>
+          <td><strong>Companion Service</strong></td>
+          <td>Android Background Service</td>
+          <td>Headless listener. Receives JSON payloads, triggers Android SMS/MMS APIs.</td>
+        </tr>
+        <tr>
+          <td><strong>Network Bridge</strong></td>
+          <td>Node.js WebSocket (ws)</td>
+          <td>Manages connection, heartbeats, and data serialization between Desktop and Phone.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- 3. Technical Specifications -->
+    <h1>3. Technical Specifications</h1>
+
+    <h3>3.1 Component 1: Desktop Application</h3>
+    <ul>
+      <li><strong>Target OS:</strong> Windows 11 (Primary)</li>
+      <li><strong>Framework:</strong> Electron 25+, React 18, TailwindCSS (for speed).</li>
+      <li><strong>Database:</strong> `better-sqlite3` for local contact storage.</li>
+      <li>
+        <strong>Key Modules:</strong>
+        <ul>
+          <li><code>/src/main/bridge.ts</code>: WebSocket server logic.</li>
+          <li><code>/src/renderer/components/Composer.tsx</code>: Rich text/Image input.</li>
+          <li><code>/src/renderer/components/Contacts.tsx</code>: Grid view for 1000+ contacts.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>3.2 Component 2: Android App v2.0 (Hybrid)</h3>
+    <ul>
+      <li><strong>Base:</strong> Existing ClubSMS v1.0 Java codebase.</li>
+      <li><strong>New Permissions:</strong> `READ_MEDIA_IMAGES`, `ACCESS_WIFI_STATE`, `INTERNET` (Local LAN only).</li>
+      <li>
+        <strong>MMS Implementation:</strong>
+        <ul>
+          <li>Use `SmsManager.sendMultimediaMessage`.</li>
+          <li>Implement Bitmap compression (Max 300KB per image).</li>
+        </ul>
+      </li>
+      <li><strong>Target Device:</strong> Samsung S20 5G (Android 13/One UI 5.1).</li>
+    </ul>
+
+    <h3>3.3 Component 3: Network Bridge</h3>
+    <ul>
+      <li><strong>Protocol:</strong> WebSocket (ws://).</li>
+      <li><strong>Discovery:</strong> Desktop broadcasts UDP beacon or manual IP entry on Phone.</li>
+      <li><strong>Security:</strong> Simple handshake with a 4-digit PIN generated on Desktop.</li>
+      <li>
+        <strong>Fallback:</strong> If WiFi fails, assume manual syncing via CSV export/import (Bluetooth scope reduced
+        to "Nice to Have" for 1-day sprint).
+      </li>
+    </ul>
+
+    <h3>3.4 Component 4: Phone Companion Service</h3>
+    <ul>
+      <li><strong>Type:</strong> Foreground Service (to prevent OS killing it).</li>
+      <li><strong>Notification:</strong> Persistent notification "ClubSMS Bridge Active".</li>
+      <li><strong>Wake Lock:</strong> Partial wake lock required during broadcast sessions.</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <!-- 4. API Specification -->
+    <h1>4. API Specification (Internal Protocol)</h1>
+
+    <p>All agents must adhere strictly to this JSON structure for WebSocket communication.</p>
+
+    <h4>A. Handshake (Phone -> Desktop)</h4>
+    <pre>
+{
+  "type": "HANDSHAKE",
+  "payload": {
+    "deviceName": "Samsung S20",
+    "batteryLevel": 85,
+    "ipAddress": "192.168.1.105"
+  }
+}</pre
+    >
+
+    <h4>B. Send Command (Desktop -> Phone)</h4>
+    <pre>
+{
+  "type": "SEND_BROADCAST",
+  "id": "uuid-v4-string",
+  "payload": {
+    "mode": "SMS" | "MMS",
+    "recipients": ["+15550199", "+15550200"],
+    "messageBody": "Club meeting tonight!",
+    "imageBase64": "..." // Null if mode is SMS
+  }
+}</pre
+    >
+
+    <h4>C. Delivery Report (Phone -> Desktop)</h4>
+    <pre>
+{
+  "type": "REPORT_STATUS",
+  "payload": {
+    "messageId": "uuid-v4-string",
+    "recipient": "+15550199",
+    "status": "SENT" | "DELIVERED" | "FAILED",
+    "timestamp": 1672531200000
+  }
+}</pre
+    >
+
+    <div class="page-break"></div>
+
+    <!-- 5. Agent Assignments -->
+    <h1>5. Agent Assignments</h1>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Agent</th>
+          <th>Role</th>
+          <th>Primary Responsibility</th>
+          <th>Output Directory</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Genspark (Me)</strong></td>
+          <td><strong>Architect / PM</strong></td>
+          <td>Master Plan, Documentation updates, Integration coordination.</td>
+          <td><code>/docs</code></td>
+        </tr>
+        <tr>
+          <td><strong>Cursor/Deepseek #1</strong></td>
+          <td><strong>Desktop Lead</strong></td>
+          <td>Build Electron App shell, React UI, and SQLite integration.</td>
+          <td><code>/desktop-app</code></td>
+        </tr>
+        <tr>
+          <td><strong>Cursor/Deepseek #2</strong></td>
+          <td><strong>Android Lead</strong></td>
+          <td>Upgrade Android App to v2.0, implement MMS logic, UI updates.</td>
+          <td><code>/android-app</code></td>
+        </tr>
+        <tr>
+          <td><strong>Cursor/Grok</strong></td>
+          <td><strong>Network Engineer</strong></td>
+          <td>Build Node.js WebSocket Server (Bridge) and Android WebSocket Client.</td>
+          <td><code>/modules/bridge</code></td>
+        </tr>
+        <tr>
+          <td><strong>Cursor/Ollama</strong></td>
+          <td><strong>Service Engineer</strong></td>
+          <td>Create Android Background Service to listen to Bridge and trigger Android Lead's Send methods.</td>
+          <td><code>/android-app/service</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 6. Development Workflow -->
+    <h1>6. Development Workflow</h1>
+
+    <h3>File Structure (OneDrive/GitHub)</h3>
+    <pre>
+/ClubSMS
+  /docs                 (Specs & Manuals)
+  /desktop-app          (Electron Source)
+  /android-app          (Android Source)
+    /app/src/main/java/com/clubsms/service  (Companion Code)
+  /shared-types         (JSON schemas)
+    </pre>
+
+    <h3>Rules of Engagement</h3>
+    <ol>
+      <li><strong>No Rogue Commits:</strong> Do not modify <code>API_SPECIFICATION.md</code> without PM approval.</li>
+      <li>
+        <strong>Mock First:</strong> Desktop Agent must mock the Phone connection to build UI before the Bridge is
+        ready.
+      </li>
+      <li>
+        <strong>Hardcoded IP:</strong> For speed, we will allow manual IP entry in the Desktop App to find the Phone.
+      </li>
+    </ol>
+
+    <div class="page-break"></div>
+
+    <!-- 7. Detailed Timeline -->
+    <h1>7. Detailed Timeline (10.5 Hours)</h1>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Phase</th>
+          <th>Goal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>08:00 - 08:30</td>
+          <td><strong>Briefing</strong></td>
+          <td>Agents ingest Master Plan. Environment setup.</td>
+        </tr>
+        <tr>
+          <td>08:30 - 10:30</td>
+          <td><strong>Sprint 1: Foundations</strong></td>
+          <td>
+            - Desktop: Hello World Electron + Contact Import UI.<br />
+            - Android: MMS Permissions + Image Picker.<br />
+            - Bridge: WebSocket Server echoing messages.
+          </td>
+        </tr>
+        <tr>
+          <td>10:30 - 10:45</td>
+          <td><strong>SYNC POINT 1</strong></td>
+          <td>Verify Electron runs on Windows. Verify Android builds.</td>
+        </tr>
+        <tr>
+          <td>10:45 - 12:45</td>
+          <td><strong>Sprint 2: Logic</strong></td>
+          <td>
+            - Desktop: Connect SQLite, generate JSON payloads.<br />
+            - Android: Implement `sendMultimediaMessage`.<br />
+            - Companion: Service starts on boot.
+          </td>
+        </tr>
+        <tr>
+          <td>12:45 - 13:15</td>
+          <td><strong>LUNCH / INTEGRATION</strong></td>
+          <td>Test WebSocket connection between Desktop and Emulator/Phone.</td>
+        </tr>
+        <tr>
+          <td>13:15 - 15:15</td>
+          <td><strong>Sprint 3: The Bridge</strong></td>
+          <td>
+            - Connect Desktop Command -> Bridge -> Android Service.<br />
+            - Handle "Image Selection" on Desktop converting to Base64.
+          </td>
+        </tr>
+        <tr>
+          <td>15:15 - 15:30</td>
+          <td><strong>SYNC POINT 2</strong></td>
+          <td>Code Freeze for new features. Only bug fixes.</td>
+        </tr>
+        <tr>
+          <td>15:30 - 17:30</td>
+          <td><strong>Final Integration</strong></td>
+          <td>Full End-to-End testing. Sending real messages to test numbers.</td>
+        </tr>
+        <tr>
+          <td>17:30 - 18:30</td>
+          <td><strong>Polish & Docs</strong></td>
+          <td>Update User Manual. Package Installers.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-warning">
+      <strong>Risk Warning:</strong> The most likely failure point is the Android Background Service being killed by
+      Samsung's "One UI" battery optimization. The Android Lead must implement a Foreground Service with a persistent
+      notification to prevent this.
+    </div>
+
+    <!-- 8. Integration Checklist -->
+    <h1>8. Integration Checklist</h1>
+    <ul>
+      <li>[ ] Desktop App launches on Windows 11 without errors.</li>
+      <li>[ ] Android App installs on S20 5G.</li>
+      <li>[ ] Phone and Desktop can ping each other over WiFi.</li>
+      <li>[ ] Image selected on Desktop arrives on Phone memory.</li>
+      <li>[ ] Phone successfully dispatches MMS via Carrier.</li>
+      <li>[ ] Desktop receives "SENT" confirmation.</li>
+    </ul>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9b4136c4fe510da2","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.9.1","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
+</body>
+</html>

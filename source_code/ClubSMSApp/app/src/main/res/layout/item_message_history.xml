@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ClubSMS App - Message History Item Layout
+    
+    This layout defines how individual message history entries appear
+    in the RecyclerView on the main screen and message history activity.
+    
+    Features:
+    - Message content preview with truncation
+    - Date/time display
+    - Delivery statistics (sent/failed counts)
+    - Visual success rate indicator
+    - Status badge with color coding
+    
+    Design follows Material Design list item patterns with:
+    - Clear information hierarchy
+    - Consistent spacing and typography
+    - Visual status indicators
+    - Accessible touch targets
+    
+    @author John (Electrical Engineer)
+    @version 1.0
+    @since 2024-12-24
+-->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="1dp"
+    app:cardBackgroundColor="@color/item_background"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Header Row: Date and Status -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <!-- Date and Time -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/messageDateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    tools:text="Dec 24, 2024" />
+
+                <TextView
+                    android:id="@+id/messageTimeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary"
+                    tools:text="at 3:45 PM" />
+
+            </LinearLayout>
+
+            <!-- Status Badge -->
+            <TextView
+                android:id="@+id/statusBadgeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/status_badge_background"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="@color/badge_text"
+                android:textAllCaps="true"
+                tools:text="EXCELLENT" />
+
+        </LinearLayout>
+
+        <!-- Message Content Preview -->
+        <TextView
+            android:id="@+id/messageContentTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/text_primary"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginBottom="8dp"
+            tools:text="Don't forget about tomorrow's club meeting at 7 PM. We'll be discussing the upcoming events and new member orientation..." />
+
+        <!-- Statistics Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Recipients Icon and Count -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_people_small"
+                    android:tint="@color/icon_tint"
+                    android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:id="@+id/recipientCountTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary"
+                    tools:text="45 sent" />
+
+            </LinearLayout>
+
+            <!-- Failed Count (shown only if > 0) -->
+            <LinearLayout
+                android:id="@+id/failedCountLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_error_small"
+                    android:tint="@color/error_color"
+                    android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:id="@+id/failedCountTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/error_color"
+                    tools:text="2 failed" />
+
+            </LinearLayout>
+
+            <!-- Success Rate -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Success Rate Indicator Circle -->
+                <View
+                    android:id="@+id/successRateIndicator"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/circle_indicator"
+                    android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:id="@+id/successRateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_secondary"
+                    tools:text="96%" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Message Length and Segments Info (shown on expand) -->
+        <LinearLayout
+            android:id="@+id/expandedInfoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:paddingTop="8dp"
+            android:visibility="gone"
+            android:background="@drawable/expanded_info_divider">
+
+            <TextView
+                android:id="@+id/messageLengthTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="11sp"
+                android:textColor="@color/text_hint"
+                tools:text="142 characters" />
+
+            <TextView
+                android:id="@+id/smsSegmentsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:textColor="@color/text_hint"
+                tools:text="1 SMS segment" />
+
+        </LinearLayout>
+
+        <!-- Expand/Collapse Indicator -->
+        <ImageView
+            android:id="@+id/expandIndicator"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_expand_more"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp"
+            android:tint="@color/text_hint"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:padding="4dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClubSMS User Manual</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <style>
+      /* Document Layout Reset */
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 40px 80px;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #000;
+        background-color: #fff;
+      }
+
+      /* Typography Override */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #2c3e50;
+        margin-top: 24px;
+        margin-bottom: 12px;
+        font-weight: bold;
+      }
+
+      h1 {
+        font-size: 24pt;
+        border-bottom: 2px solid #2c3e50;
+        padding-bottom: 10px;
+      }
+      h2 {
+        font-size: 18pt;
+        border-bottom: 1px solid #bdc3c7;
+        padding-bottom: 5px;
+        margin-top: 32px;
+      }
+      h3 {
+        font-size: 14pt;
+        color: #34495e;
+      }
+
+      p {
+        margin-bottom: 12px;
+        text-align: justify;
+      }
+      li {
+        margin-bottom: 6px;
+      }
+
+      /* Cover Page */
+      .cover-page {
+        text-align: center;
+        padding-top: 150px;
+        padding-bottom: 150px;
+        page-break-after: always;
+      }
+      .cover-title {
+        font-size: 36pt;
+        margin-bottom: 20px;
+        color: #1a252f;
+      }
+      .cover-subtitle {
+        font-size: 18pt;
+        color: #7f8c8d;
+        margin-bottom: 60px;
+      }
+      .cover-meta {
+        font-family: Arial, sans-serif;
+        margin-top: 100px;
+        font-size: 12pt;
+      }
+
+      /* Table of Contents */
+      .toc {
+        font-family: Arial, sans-serif;
+        margin-bottom: 40px;
+        page-break-after: always;
+      }
+      .toc-item {
+        display: block;
+        margin-bottom: 8px;
+        color: #2980b9;
+        text-decoration: none;
+        border-bottom: 1px dotted #ccc;
+        padding-bottom: 2px;
+      }
+      .toc-item:visited {
+        color: #2980b9;
+      }
+
+      /* Warning/Note Boxes */
+      .note-box {
+        border: 1px solid #3498db;
+        background-color: #f0f7fb;
+        padding: 15px;
+        margin: 20px 0;
+        font-family: Arial, sans-serif;
+        font-size: 11pt;
+      }
+      .warning-box {
+        border: 1px solid #e74c3c;
+        background-color: #fdedec;
+        padding: 15px;
+        margin: 20px 0;
+        font-family: Arial, sans-serif;
+        font-size: 11pt;
+      }
+      .box-title {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* Breadcrumbs/Steps */
+      ol {
+        margin-left: 20px;
+      }
+      ul {
+        margin-left: 20px;
+      }
+
+      /* Footer */
+      .footer {
+        margin-top: 50px;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+        font-size: 10pt;
+        text-align: center;
+        color: #7f8c8d;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Utility */
+      .page-break {
+        page-break-after: always;
+      }
+      code {
+        background-color: #f4f4f4;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 11pt;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Cover Page -->
+    <div class="cover-page">
+      <div class="cover-title">ClubSMS</div>
+      <div class="cover-subtitle">User Manual &amp; Administration Guide</div>
+
+      <div class="cover-meta">
+        <p><strong>Version:</strong> 1.0.0</p>
+        <p><strong>Document Date:</strong> October 2023</p>
+        <p><strong>Prepared For:</strong> Club Organizers &amp; Administrators</p>
+      </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+      <h1>Table of Contents</h1>
+      <a href="#welcome" class="toc-item">1. Welcome to ClubSMS</a>
+      <a href="#installation" class="toc-item">2. Installation Guide</a>
+      <a href="#setup" class="toc-item">3. Initial Setup &amp; Configuration</a>
+      <a href="#features" class="toc-item">4. Feature Guide</a>
+      <div style="margin-left: 20px">
+        <a href="#contacts" class="toc-item">4.1 Contact Management</a>
+        <a href="#broadcasting" class="toc-item">4.2 SMS Broadcasting</a>
+        <a href="#history" class="toc-item">4.3 Message History &amp; Analytics</a>
+        <a href="#optout" class="toc-item">4.4 Opt-out Management</a>
+        <a href="#data" class="toc-item">4.5 Data Export/Import</a>
+      </div>
+      <a href="#best-practices" class="toc-item">5. Best Practices</a>
+      <a href="#troubleshooting" class="toc-item">6. Troubleshooting</a>
+      <a href="#faq" class="toc-item">7. Frequently Asked Questions (FAQ)</a>
+      <a href="#privacy" class="toc-item">8. Privacy &amp; Security</a>
+      <a href="#support" class="toc-item">9. Support</a>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Content -->
+    <h1 id="welcome">1. Welcome to ClubSMS</h1>
+    <p>
+      Thank you for choosing ClubSMS. This application is designed specifically for club organizers who need a reliable,
+      efficient way to communicate with their members without the hassle of individual messaging or complex third-party
+      services.
+    </p>
+    <p>
+      ClubSMS allows you to manage up to 1,000+ member contacts directly on your phone and broadcast SMS updates, event
+      reminders, and emergency notifications instantly. Designed with privacy in mind, all your data resides locally on
+      your device.
+    </p>
+
+    <h3>Key Benefits</h3>
+    <ul>
+      <li><strong>Mass Communication:</strong> Send updates to your entire roster with a single tap.</li>
+      <li><strong>Privacy First:</strong> No cloud servers; your member data stays on your phone.</li>
+      <li><strong>Cost Effective:</strong> Uses your existing mobile carrier plan for SMS.</li>
+      <li><strong>Compliance:</strong> Built-in tools to manage member opt-outs respectfully.</li>
+    </ul>
+
+    <h1 id="installation">2. Installation Guide</h1>
+    <p>
+      ClubSMS is provided as a direct Android Package (APK) file. Follow these steps to install the application on your
+      Android device.
+    </p>
+
+    <h3>Step-by-Step Installation</h3>
+    <ol>
+      <li>Download the <code>ClubSMS-v1.0.0.apk</code> file to your Android device.</li>
+      <li>Locate the file in your device's <strong>Downloads</strong> folder or notification shade.</li>
+      <li>Tap on the file to begin installation.</li>
+      <li>
+        If prompted with a security warning about "Unknown Sources," tap <strong>Settings</strong> and toggle "Allow
+        from this source." This is required because the app is being installed directly rather than through the Play
+        Store.
+      </li>
+      <li>Return to the installation screen and tap <strong>Install</strong>.</li>
+      <li>Once finished, tap <strong>Open</strong> to launch ClubSMS.</li>
+    </ol>
+
+    <div class="note-box">
+      <span class="box-title">System Requirements:</span>
+      ClubSMS works on Android devices running Android 5.0 (Lollipop) or newer. For lists larger than 500 contacts, a
+      device with at least 3GB of RAM is recommended for optimal performance.
+    </div>
+
+    <h1 id="setup">3. Initial Setup &amp; Configuration</h1>
+    <p>
+      Upon launching ClubSMS for the first time, you will need to grant specific permissions to allow the app to
+      function correctly.
+    </p>
+
+    <h3>Granting Permissions</h3>
+    <ol>
+      <li>
+        <strong>Contacts Access:</strong> The app will request access to your contacts. Tap <strong>Allow</strong>. This
+        is necessary to import your existing club members from your phone book.
+      </li>
+      <li>
+        <strong>SMS Management:</strong> The app will request permission to send and view SMS messages. Tap
+        <strong>Allow</strong>. This is critical for the broadcasting feature to work.
+      </li>
+    </ol>
+
+    <div class="warning-box">
+      <span class="box-title">Important:</span>
+      If you deny these permissions, the core features of the application will be disabled. You can manually enable them
+      later in your phone's Settings > Apps > ClubSMS > Permissions.
+    </div>
+
+    <h1 id="features">4. Feature Guide</h1>
+
+    <h2 id="contacts">4.1 Contact Management</h2>
+    <p>
+      The heart of ClubSMS is your member database. You can keep your club contacts separate from your personal contacts
+      or import them directly.
+    </p>
+
+    <h3>Importing from Phone</h3>
+    <ol>
+      <li>Navigate to the <strong>Contacts</strong> tab.</li>
+      <li>Tap the <strong>Import</strong> button.</li>
+      <li>Select the contacts you wish to add to your club list.</li>
+      <li>Tap <strong>Confirm</strong> to import them.</li>
+    </ol>
+
+    <h3>Manually Adding Members</h3>
+    <ol>
+      <li>Tap the <strong>+ (Add)</strong> button on the Contacts screen.</li>
+      <li>Enter the member's Name and Phone Number.</li>
+      <li>Tap <strong>Save</strong>.</li>
+    </ol>
+
+    <h3>Editing or Removing Members</h3>
+    <p>
+      To edit a member's details or remove them (e.g., if they have left the club), tap on their name in the list.
+      Select <strong>Edit</strong> to change details or <strong>Delete</strong> to remove them entirely.
+    </p>
+
+    <h2 id="broadcasting">4.2 SMS Broadcasting</h2>
+    <p>Send messages to all active members efficiently.</p>
+
+    <ol>
+      <li>Go to the <strong>Broadcast</strong> tab (Main Screen).</li>
+      <li>Type your message in the text field. The character counter will show you the length of your message.</li>
+      <li>Review your message carefully.</li>
+      <li>Tap <strong>Send Broadcast</strong>.</li>
+      <li>
+        A confirmation dialog will appear showing the total number of recipients. Tap <strong>Confirm</strong> to begin
+        sending.
+      </li>
+    </ol>
+
+    <div class="note-box">
+      <span class="box-title">SMS Segments:</span>
+      Standard SMS messages are 160 characters. If your message is longer, it will be split into multiple segments,
+      which may cost more depending on your carrier plan. ClubSMS displays the segment count before you send.
+    </div>
+
+    <h2 id="history">4.3 Message History &amp; Analytics</h2>
+    <p>Keep track of what you sent and who received it.</p>
+    <p>
+      Navigate to the <strong>History</strong> tab to see a chronological list of all broadcasts. Tapping on a specific
+      broadcast will show:
+    </p>
+    <ul>
+      <li>Date and time sent</li>
+      <li>Full message content</li>
+      <li>Total recipients</li>
+      <li>Success/Failure delivery counts</li>
+    </ul>
+
+    <h2 id="optout">4.4 Opt-out Management</h2>
+    <p>Respecting member privacy is crucial. ClubSMS includes an automated status system.</p>
+    <p>
+      If a member requests to stop receiving messages, find their contact entry and toggle the
+      <strong>Active/Inactive</strong> switch to "Inactive".
+    </p>
+    <ul>
+      <li><strong>Active:</strong> Will receive broadcasts.</li>
+      <li>
+        <strong>Inactive (Opted-out):</strong> Will remains in your database but will be
+        <strong>automatically skipped</strong> during broadcasts.
+      </li>
+    </ul>
+
+    <h2 id="data">4.5 Data Export/Import</h2>
+    <p>It is recommended to back up your club data periodically.</p>
+    <ol>
+      <li>Go to <strong>Settings</strong>.</li>
+      <li>Select <strong>Export Data</strong>.</li>
+      <li>
+        This will create a CSV/JSON file of your member list and history. Save this file to your device or Google Drive.
+      </li>
+    </ol>
+
+    <div class="page-break"></div>
+
+    <h1 id="best-practices">5. Best Practices</h1>
+    <p>To ensure high delivery rates and maintain member satisfaction, follow these guidelines:</p>
+    <ul>
+      <li>
+        <strong>Identify Yourself:</strong> Always start your message with your club name (e.g., "Chess Club Update:").
+        Members may not have your number saved.
+      </li>
+      <li>
+        <strong>Timing:</strong> Avoid sending broadcasts late at night or very early in the morning unless it is an
+        emergency.
+      </li>
+      <li>
+        <strong>Frequency:</strong> Do not spam. Limit messages to essential updates to prevent members from opting out.
+      </li>
+      <li>
+        <strong>Batch Sizes:</strong> While ClubSMS can handle 1,000+ contacts, your mobile carrier might flag
+        rapid-fire messaging as spam. For very large lists, consider sending in smaller batches if you notice delivery
+        issues.
+      </li>
+    </ul>
+
+    <h1 id="troubleshooting">6. Troubleshooting</h1>
+
+    <h3>Messages Not Sending</h3>
+    <ul>
+      <li><strong>Check Signal:</strong> Ensure you have strong cellular signal.</li>
+      <li><strong>Check Credit/Plan:</strong> Verify your mobile plan has sufficient SMS allowance.</li>
+      <li>
+        <strong>Carrier Limits:</strong> Some carriers limit the number of SMS sent per hour (e.g., 100/hour). If
+        sending fails, wait an hour and try again.
+      </li>
+    </ul>
+
+    <h3>App Crashing on Import</h3>
+    <ul>
+      <li>
+        This may happen if you select thousands of contacts at once on an older device. Try importing contacts in
+        batches of 100-200.
+      </li>
+    </ul>
+
+    <h1 id="faq">7. Frequently Asked Questions (FAQ)</h1>
+
+    <p>
+      <strong>Q: Does this use my data plan or SMS plan?</strong><br />
+      A: ClubSMS uses your cellular carrier's <strong>SMS plan</strong>. It does not use the internet to send messages.
+    </p>
+
+    <p>
+      <strong>Q: Can I send photos?</strong><br />
+      A: Currently, ClubSMS supports text-only broadcasts to ensure maximum compatibility and reliability.
+    </p>
+
+    <p>
+      <strong>Q: Will members see each other's replies?</strong><br />
+      A: No. Messages are sent as individual SMS. If a member replies, it comes only to your phone, just like a normal
+      text message.
+    </p>
+
+    <h1 id="privacy">8. Privacy &amp; Security</h1>
+    <p>ClubSMS is designed with a "Local First" architecture.</p>
+    <ul>
+      <li>
+        <strong>Data Storage:</strong> All contact lists, message history, and logs are stored internally on your device
+        in a private database.
+      </li>
+      <li><strong>No Cloud Uploads:</strong> We do not upload your member list to any external servers.</li>
+      <li>
+        <strong>Permissions:</strong> The app only requests permissions strictly necessary for its function (Contacts
+        and SMS).
+      </li>
+    </ul>
+
+    <h1 id="support">9. Support &amp; Contact</h1>
+    <p>For additional support, bug reports, or feature requests, please contact the development team.</p>
+
+    <p style="margin-top: 20px">
+      <strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="74070104041b060034171801160719075a101102">[email&#160;protected]</a><br />
+      <strong>Technical Documentation:</strong> Available in the <code>docs/</code> folder of the project repository.<br />
+      <strong>Website:</strong> www.clubsms.dev
+    </p>
+
+    <div class="footer">
+      &copy; 2023 ClubSMS Development Team. All Rights Reserved.<br />
+      ClubSMS User Manual v1.0.0
+    </div>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9b413e654e580da2","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.9.1","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
+</body>
+</html>

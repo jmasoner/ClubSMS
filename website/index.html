@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ============================================
+         OPEN GRAPH TAGS - For Rich Link Previews
+         ============================================
+         These tags tell messaging apps (SMS, iMessage, 
+         WhatsApp, Facebook, etc.) how to display your 
+         link when shared.
+         
+         CUSTOMIZE THESE FOR EACH EVENT/PAGE:
+    -->
+    
+    <!-- Basic OG Tags (REQUIRED) -->
+    <meta property="og:title" content="Club Meeting Tonight! 🎉">
+    <meta property="og:description" content="Join us at 7 PM for our monthly meeting. Snacks provided! Click for details and RSVP.">
+    <meta property="og:image" content="https://yourclub.com/images/event-banner.jpg">
+    <meta property="og:url" content="https://yourclub.com/meeting">
+    <meta property="og:type" content="website">
+    
+    <!-- Additional OG Tags (OPTIONAL but recommended) -->
+    <meta property="og:site_name" content="Your Club Name">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Club meeting event banner">
+    
+    <!-- Twitter Card (for Twitter/X previews) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Club Meeting Tonight! 🎉">
+    <meta name="twitter:description" content="Join us at 7 PM for our monthly meeting.">
+    <meta name="twitter:image" content="https://yourclub.com/images/event-banner.jpg">
+    
+    <!-- Standard Meta -->
+    <title>Club Meeting Tonight! | Your Club Name</title>
+    <meta name="description" content="Join us at 7 PM for our monthly meeting. Snacks provided!">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <style>
+        /* Modern, clean design */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent: #22d3ee;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .event-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+        }
+        
+        .content {
+            padding: 32px;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+        
+        .description {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .details {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .detail-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-muted);
+        }
+        
+        .detail-row .icon {
+            font-size: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <!-- Replace with your event image -->
+            <div class="event-image">
+                🎉
+            </div>
+            
+            <div class="content">
+                <span class="badge">Tonight</span>
+                <h1>Monthly Club Meeting</h1>
+                <p class="description">
+                    Join us for our regular monthly meeting! We'll be discussing 
+                    upcoming events, reviewing last month's activities, and enjoying 
+                    some refreshments together.
+                </p>
+                
+                <div class="details">
+                    <div class="detail-row">
+                        <span class="icon">📅</span>
+                        <span>Friday, December 26, 2025</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="icon">🕖</span>
+                        <span>7:00 PM - 9:00 PM</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="icon">📍</span>
+                        <span>Community Center, Room 101</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="icon">🍕</span>
+                        <span>Snacks and drinks provided!</span>
+                    </div>
+                </div>
+                
+                <a href="mailto:rsvp@yourclub.com?subject=RSVP%20for%20Meeting" class="btn">
+                    RSVP Now →
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Questions? Contact us at <a href="mailto:info@yourclub.com">info@yourclub.com</a></p>
+        </div>
+    </div>
+</body>
+</html>
+
